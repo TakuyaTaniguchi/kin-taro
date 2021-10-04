@@ -2,11 +2,21 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { format } from 'date-fns'
-
+import { useState, useEffect } from 'react';
 export default function Home() {
 
-  const clock = () => {
-    return format(new Date(),'yyyy/MM/dd:HH:mm:ss').toString()
+
+  const [date, setDate] = useState(format(new Date(),'yyyy/MM/dd: HH:mm:ss'));
+  //Replaces componentDidMount and componentWillUnmount
+  useEffect(() => {
+    let timerID = setInterval( () => tick(), 1000 );
+    return function cleanup() {
+        clearInterval(timerID);
+      };
+  });
+
+  function tick() {
+    setDate(format(new Date(),'yyyy/MM/dd: HH:mm:ss'));
   }
 
   const start = () => {
@@ -20,7 +30,6 @@ export default function Home() {
   const rest = () => {
     console.log('rest')
   }
-
   return (
     <div className={styles.container}>
       <Head>
@@ -30,7 +39,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div className={styles.top}>{clock()}</div>
+        <div className={styles.top}>{date}</div>
         <div className={styles.controller}>
           <button onClick={start}>開始</button>
           <button onClick={end}>終了</button>
