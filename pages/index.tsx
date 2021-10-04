@@ -19,10 +19,11 @@ export default function Home() {
     setDate(format(new Date(),'yyyy/MM/dd: HH:mm:ss'));
   }
 
-  const start = () => {
-    console.log('start')
-  }
+  const [start, setStart] = useState(format(new Date(),'yyyy/MM/dd: HH:mm:ss'));
 
+  const test = () => {
+    setStart(date)
+  }
   const end = () => {
     console.log('end')
   }
@@ -41,7 +42,7 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.top}>{date}</div>
         <div className={styles.controller}>
-          <button onClick={start}>開始</button>
+          {/* <button onClick={test}>開始:{ start }</button> */}
           <button onClick={end}>終了</button>
           <button onClick={rest}>休憩</button>
         </div>
