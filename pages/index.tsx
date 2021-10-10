@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css'
 import { format,parseISO,parse } from 'date-fns'
 import {useState, useEffect} from 'react';
 import Link from 'next/link'
-
+import { button } from '../styles/button.css'
 
 export default function Home() {
 
@@ -106,8 +106,8 @@ export default function Home() {
           </div>
         </div>
         <div className={styles.controller}>
-          <button onClick={() => setStart(date)}>開始:{ start }</button>
-          <button onClick={() => setEnd(date)}>終了:{ end }</button>
+          <button className={button['start']} onClick={() => setStart(date)}>開始:{ start }</button>
+          <button className={button['end']} onClick={() => setEnd(date)}>終了:{ end }</button>
           <button onClick={() => setStartRest(date)}>休憩開始:{startRest}</button>
           <button onClick={() => setEndRest(date)}>休憩終了:{ endRest }</button>
 
