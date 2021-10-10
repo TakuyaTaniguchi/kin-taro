@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import { format } from 'date-fns'
+import { format,parseISO,parse } from 'date-fns'
 import { useState, useEffect } from 'react';
 export default function Home() {
 
 
-  const [date, setDate] = useState(format(new Date(),'yyyy/MM/dd: HH:mm:ss'));
+  const [date, setDate] = useState(format(new Date(), 'yyyy/MM/dd: HH:mm:ss'));
   //Replaces componentDidMount and componentWillUnmount
   useEffect(() => {
     let timerID = setInterval( () => tick(), 1000 );
@@ -19,18 +19,61 @@ export default function Home() {
     setDate(format(new Date(),'yyyy/MM/dd: HH:mm:ss'));
   }
 
-  const [start, setStart] = useState(format(new Date(),'yyyy/MM/dd: HH:mm:ss'));
+  const [start, setStart] = useState(null as null | string);
+  const [end, setEnd] = useState(null as null | string);
+  const [startRest, setStartRest] = useState(null as null | string);
+  const [endRest, setEndRest] = useState(null as null | string);
 
-  const test = () => {
-    setStart(date)
-  }
-  const end = () => {
-    console.log('end')
+  /**
+   * それぞれの値付きでその時の時刻を保存する関数を用意する
+   * 開始、終了、休憩開始、休憩終了
+   * タイムゾーン怪しい
+   * 日付つきでlocalstrageに保存する
+   */
+
+  const read = ()=>{
+      // const read = JSON.parse(localStorage.getItem('attendance'))
+    // console.log(format(parseISO(read[read.length -1 ].date),'yyyy/MM/dd: HH:mm:ss'))
   }
 
-  const rest = () => {
-    console.log('rest')
+  const submit = () => {
+
+    /**
+     * バリデーション
+     * 初回の追加
+     * 今のストレージをを読んで追加するか
+     * localstrageに保存する
+     */
+
+    //  const data = [
+    //   {
+    //     'キー1': '値1',
+    //     'キー2': '値22',
+    //     'キー3': '値2',
+    //     }
+    // ]
+
+    // const read = JSON.parse(localStorage.getItem('attendance'))
+    // console.log(format(parseISO(read[read.length -1 ].date),'yyyy/MM/dd: HH:mm:ss'))
+
+    const attendance = JSON.parse(localStorage.getItem("attendance"));
+
+    attendance.push({
+      'date': new Date(),
+      'start': parse(start, 'yyyy/MM/dd: HH:mm:ss', new Date()),
+      'end': parse(end, 'yyyy/MM/dd: HH:mm:ss', new Date()),
+      'startRest': parse(startRest, 'yyyy/MM/dd: HH:mm:ss', new Date()),
+      'endRest': parse(endRest, 'yyyy/MM/dd: HH:mm:ss', new Date()),
+      })
+
+
+    const setjson = JSON.stringify(attendance);
+
+    localStorage.setItem('attendance', setjson);
   }
+
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -42,9 +85,13 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.top}>{date}</div>
         <div className={styles.controller}>
-          {/* <button onClick={test}>開始:{ start }</button> */}
-          <button onClick={end}>終了</button>
-          <button onClick={rest}>休憩</button>
+          <button onClick={() => setStart(date)}>開始:{ start }</button>
+          <button onClick={() => setEnd(date)}>終了:{ end }</button>
+          <button onClick={() => setStartRest(date)}>休憩開始:{startRest}</button>
+          <button onClick={() => setEndRest(date)}>休憩終了:{ endRest }</button>
+          
+          <button onClick={() => submit()}>記録</button>
+
         </div>
         <div className={styles.display}>
           <div>
