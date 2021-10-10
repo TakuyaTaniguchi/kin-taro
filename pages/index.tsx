@@ -2,7 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import { format,parseISO,parse } from 'date-fns'
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
+import Link from 'next/link'
+
+
 export default function Home() {
 
 
@@ -45,31 +48,37 @@ export default function Home() {
      * localstrageに保存する
      */
 
-    //  const data = [
-    //   {
-    //     'キー1': '値1',
-    //     'キー2': '値22',
-    //     'キー3': '値2',
-    //     }
-    // ]
+    const stg = localStorage.getItem("attendance")
+    if (stg) {
+      const attendance = JSON.parse(stg)
 
-    // const read = JSON.parse(localStorage.getItem('attendance'))
-    // console.log(format(parseISO(read[read.length -1 ].date),'yyyy/MM/dd: HH:mm:ss'))
+      attendance.push({
+        'date': new Date(),
+        'start': parse(start, 'yyyy/MM/dd: HH:mm:ss', new Date()),
+        'end': parse(end, 'yyyy/MM/dd: HH:mm:ss', new Date()),
+        'startRest': parse(startRest, 'yyyy/MM/dd: HH:mm:ss', new Date()),
+        'endRest': parse(endRest, 'yyyy/MM/dd: HH:mm:ss', new Date()),
+        })
 
-    const attendance = JSON.parse(localStorage.getItem("attendance"));
+      const setjson = JSON.stringify(attendance);
+      localStorage.setItem('attendance', setjson);
+    } else {
 
-    attendance.push({
-      'date': new Date(),
-      'start': parse(start, 'yyyy/MM/dd: HH:mm:ss', new Date()),
-      'end': parse(end, 'yyyy/MM/dd: HH:mm:ss', new Date()),
-      'startRest': parse(startRest, 'yyyy/MM/dd: HH:mm:ss', new Date()),
-      'endRest': parse(endRest, 'yyyy/MM/dd: HH:mm:ss', new Date()),
-      })
+      const data = [
+        {
+          'date': new Date(),
+          'start': new Date(),
+          'end': new Date(),
+          'startRest': new Date(),
+          'endRest': new Date(),
+          }
+      ]
+      const setjson = JSON.stringify(data);
+      localStorage.setItem('attendance', setjson);
+    }
 
 
-    const setjson = JSON.stringify(attendance);
 
-    localStorage.setItem('attendance', setjson);
   }
 
 
@@ -84,12 +93,24 @@ export default function Home() {
 
       <main className={styles.main}>
         <div className={styles.top}>{date}</div>
+        <div>
+          <div>
+              <Link href="/">
+                <a>HOME</a>
+              </Link>
+          </div>
+          <div>
+              <Link href="/calender">
+                <a>Calender</a>
+              </Link>
+          </div>
+        </div>
         <div className={styles.controller}>
           <button onClick={() => setStart(date)}>開始:{ start }</button>
           <button onClick={() => setEnd(date)}>終了:{ end }</button>
           <button onClick={() => setStartRest(date)}>休憩開始:{startRest}</button>
           <button onClick={() => setEndRest(date)}>休憩終了:{ endRest }</button>
-          
+
           <button onClick={() => submit()}>記録</button>
 
         </div>
