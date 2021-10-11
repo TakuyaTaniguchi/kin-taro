@@ -6,6 +6,15 @@ import {useState, useEffect} from 'react';
 import Link from 'next/link'
 import {button} from '../styles/button.css'
 
+
+function TimeFormat(props: any) {
+  /**
+   * いい感じに見やすいようにformatする
+   * ここにf
+   */
+  return <div>{ props.time }</div>
+}
+
 export default function Home() {
 
 
@@ -27,6 +36,8 @@ export default function Home() {
   const [startRest, setStartRest] = useState(null as null | string);
   const [endRest, setEndRest] = useState(null as null | string);
 
+  const [aaaaa] = useState('aaaaaaaaa');
+
   /**
    * それぞれの値付きでその時の時刻を保存する関数を用意する
    * 開始、終了、休憩開始、休憩終了
@@ -34,7 +45,8 @@ export default function Home() {
    * 日付つきでlocalstrageに保存する
    */
 
-  const read = ()=>{
+  const read = () => {
+    
       // const read = JSON.parse(localStorage.getItem('attendance'))
     // console.log(format(parseISO(read[read.length -1 ].date),'yyyy/MM/dd: HH:mm:ss'))
   }
@@ -119,6 +131,7 @@ export default function Home() {
             <span>{start}</span>~<span>{end}</span>
           </div>
           <div>
+            <TimeFormat time={start}/>
             <span>{startRest}</span>~<span>{ endRest }</span>
           </div>
         </div>
