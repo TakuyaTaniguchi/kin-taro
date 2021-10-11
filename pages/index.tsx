@@ -54,10 +54,10 @@ export default function Home() {
 
       attendance.push({
         'date': new Date(),
-        'start': parse(start, 'yyyy/MM/dd: HH:mm:ss', new Date()),
-        'end': parse(end, 'yyyy/MM/dd: HH:mm:ss', new Date()),
-        'startRest': parse(startRest, 'yyyy/MM/dd: HH:mm:ss', new Date()),
-        'endRest': parse(endRest, 'yyyy/MM/dd: HH:mm:ss', new Date()),
+        'start': parse(start, 'yyyy/MM/dd: HH:mm', new Date()),
+        'end': parse(end, 'yyyy/MM/dd: HH:mm', new Date()),
+        'startRest': parse(startRest, 'yyyy/MM/dd: HH:mm', new Date()),
+        'endRest': parse(endRest, 'yyyy/MM/dd: HH:mm', new Date()),
         })
 
       const setjson = JSON.stringify(attendance);
