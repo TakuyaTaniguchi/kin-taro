@@ -9,7 +9,7 @@ import {button} from '../styles/button.css'
 export default function Home() {
 
 
-  const [date, setDate] = useState(format(new Date(), 'yyyy/MM/dd: HH:mm:ss'));
+  const [date, setDate] = useState(format(new Date(), 'yyyy/MM/dd: HH:mm'));
   //Replaces componentDidMount and componentWillUnmount
   useEffect(() => {
     let timerID = setInterval( () => tick(), 1000 );
@@ -19,7 +19,7 @@ export default function Home() {
   });
 
   function tick() {
-    setDate(format(new Date(),'yyyy/MM/dd: HH:mm:ss'));
+    setDate(format(new Date(),'yyyy/MM/dd: HH:mm'));
   }
 
   const [start, setStart] = useState(null as null | string);
@@ -116,10 +116,10 @@ export default function Home() {
         </div>
         <div className={styles.display}>
           <div>
-            <span>{start}</span>~<span>:{end}</span>
+            <span>{start}</span>~<span>{end}</span>
           </div>
           <div>
-            <span>:{startRest}</span>~<span>{ endRest }</span>
+            <span>{startRest}</span>~<span>{ endRest }</span>
           </div>
         </div>
       </main>

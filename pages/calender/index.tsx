@@ -16,10 +16,10 @@ function Date() {
             return (
                 <div key="index">
                     <div>日付:{format(parseISO(v.date), 'yyyy/MM/dd')}</div>
-                    <div>開始:{format(parseISO(v.start), 'yyyy/MM/dd: HH:mm:ss')}</div>
-                    <div>休憩開始:{format(parseISO(v.endRest), 'yyyy/MM/dd: HH:mm:ss')}</div>
-                    <div>休憩終了:{format(parseISO(v.endRest), 'yyyy/MM/dd: HH:mm:ss')}</div>
-                    <div>終了:{format(parseISO(v.end), 'yyyy/MM/dd: HH:mm:ss')}</div>
+                    <div>開始:{format(parseISO(v.start), 'yyyy/MM/dd: HH:mm')}</div>
+                    <div>休憩開始:{format(parseISO(v.endRest), 'yyyy/MM/dd: HH:mm')}</div>
+                    <div>休憩終了:{format(parseISO(v.endRest), 'yyyy/MM/dd: HH:mm')}</div>
+                    <div>終了:{format(parseISO(v.end), 'yyyy/MM/dd: HH:mm')}</div>
                 </div>
             )
         })
