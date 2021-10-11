@@ -1,10 +1,26 @@
 import { createTheme, style,styleVariants } from '@vanilla-extract/css';
+import { green,red,yellow,green_high,orange } from './base-color.css'
+
+const base = style({
+    padding: "6px 48px",
+    fontSize: "16px",
+    borderRadius: "8px",
+    border: "1px solid black",
+})
+
+
 
 export const button = styleVariants({
-    start: [{
-        color : "red"
+    start: [base,{
+        backgroundColor : green_high
     }],
-    end: [{
-        color : "blue"
+    end: [base,{
+        backgroundColor : red
+    }],
+    rest: [base, {
+        backgroundColor: yellow
+    }],
+    submit: [base,{
+        backgroundColor : green
     }]
 })

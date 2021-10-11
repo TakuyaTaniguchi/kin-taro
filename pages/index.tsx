@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css'
 import { format,parseISO,parse } from 'date-fns'
 import {useState, useEffect} from 'react';
 import Link from 'next/link'
-import { button } from '../styles/button.css'
+import {button} from '../styles/button.css'
 
 export default function Home() {
 
@@ -106,20 +106,20 @@ export default function Home() {
           </div>
         </div>
         <div className={styles.controller}>
-          <button className={button['start']} onClick={() => setStart(date)}>開始:{ start }</button>
-          <button className={button['end']} onClick={() => setEnd(date)}>終了:{ end }</button>
-          <button onClick={() => setStartRest(date)}>休憩開始:{startRest}</button>
-          <button onClick={() => setEndRest(date)}>休憩終了:{ endRest }</button>
+          <button className={button['start']} onClick={() => setStart(date)}>開始</button>
+          <button className={button['end']} onClick={() => setEnd(date)}>終了</button>
+          <button className={button['rest']} onClick={() => setStartRest(date)}>休憩開始</button>
+          <button className={button['rest']} onClick={() => setEndRest(date)}>休憩終了</button>
 
-          <button onClick={() => submit()}>記録</button>
+          <button className={button['submit']} onClick={() => submit()}>保存</button>
 
         </div>
         <div className={styles.display}>
           <div>
-            <span>10:00</span>~<span>19:00</span>
+            <span>{start}</span>~<span>:{end}</span>
           </div>
           <div>
-            <span>13:00</span>~<span>14:00</span>
+            <span>:{startRest}</span>~<span>{ endRest }</span>
           </div>
         </div>
       </main>
