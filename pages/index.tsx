@@ -5,6 +5,11 @@ import { format,parseISO,parse } from 'date-fns'
 import {useState, useEffect} from 'react';
 import Link from 'next/link'
 import {button} from '../styles/button.css'
+import {controller, controller_submit} from '../styles/controller.css'
+import {header} from '../styles/header.css'
+import {marginTop} from '../styles/margin.css'
+import { display,display_time} from '../styles/display.css'
+
 
 
 function TimeFormat(props: any) {
@@ -104,8 +109,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div className={styles.top}>{date}</div>
-        <div>
+        <div className={ header }>
           <div>
               <Link href="/">
                 <a>HOME</a>
@@ -117,22 +121,33 @@ export default function Home() {
               </Link>
           </div>
         </div>
-        <div className={styles.controller}>
+        <div className={ `${marginTop['32']}`}>{date}</div>
+        <div className={`${controller} ${marginTop['32']}`}>
           <button className={button['start']} onClick={() => setStart(date)}>開始</button>
           <button className={button['end']} onClick={() => setEnd(date)}>終了</button>
           <button className={button['rest']} onClick={() => setStartRest(date)}>休憩開始</button>
           <button className={button['rest']} onClick={() => setEndRest(date)}>休憩終了</button>
 
-          <button className={button['submit']} onClick={() => submit()}>保存</button>
+          <button className={`${button['submit']} ${controller_submit}`} onClick={() => submit()}>保存</button>
 
         </div>
-        <div className={styles.display}>
+        <div className={display}>
+          <h2>打刻時間</h2>
           <div>
-            <span>{start}</span>~<span>{end}</span>
-          </div>
-          <div>
-            <TimeFormat time={start}/>
-            <span>{startRest}</span>~<span>{ endRest }</span>
+            <div className={display_time }>
+              <span>{start}</span>
+                {start &&
+                  <span>〜</span>
+                }
+              <span>{end}</span>
+            </div>
+            <div className={display_time }>
+              <span>{startRest}</span>
+                {startRest &&
+                    <span>〜</span>
+                }
+              <span>{endRest}</span>
+            </div>
           </div>
         </div>
       </main>
