@@ -6,11 +6,10 @@ import {useState, useEffect} from 'react';
 import Link from 'next/link'
 import {button} from '../styles/button.css'
 import {controller, controller_submit} from '../styles/controller.css'
-import {header} from '../styles/header.css'
 import {marginTop} from '../styles/margin.css'
 import { display,display_time} from '../styles/display.css'
 
-
+import Header from '../components/header'
 
 function TimeFormat(props: any) {
   /**
@@ -109,18 +108,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <div className={ header }>
-          <div>
-              <Link href="/">
-                <a>HOME</a>
-              </Link>
-          </div>
-          <div>
-              <Link href="/calender">
-                <a>Calender</a>
-              </Link>
-          </div>
-        </div>
+          <Header />
         <div className={ `${marginTop['32']}`}>{date}</div>
         <div className={`${controller} ${marginTop['32']}`}>
           <button className={button['start']} onClick={() => setStart(date)}>開始</button>

@@ -6,6 +6,7 @@ import {useState, useEffect} from 'react';
 import Link from 'next/link'
 import {marginTop} from '../../styles/margin.css'
 import { calender_header} from '../../styles/calender.css'
+import Header from '../../components/header'
 
 
 const isServer = () => typeof window === 'undefined';
@@ -47,7 +48,7 @@ export default function Calender() {
 
   return (
     <div className={styles.container}>
-
+        <Header/>
         <h1>カレンダー</h1>
         <div className={ calender_header }>
             <div>日付</div>
