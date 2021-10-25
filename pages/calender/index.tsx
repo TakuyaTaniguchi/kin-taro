@@ -53,8 +53,8 @@ export default function Calender() {
         <div className={ calender_header }>
             <div>日付</div>
             <div>開始</div>
-            <div>休憩</div>
             <div>終了</div>
+            <div>休憩</div>
         </div>
 
         {!isServer() && <Date />}
