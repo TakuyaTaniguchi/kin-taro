@@ -7,6 +7,7 @@ const base = style({
     fontSize: "16px",
     borderRadius: "8px",
     border: "1px solid black",
+    cursor: "pointer",
 })
 
 
