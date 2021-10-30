@@ -7,10 +7,15 @@ import Link from 'next/link'
 import {marginTop} from '../../styles/margin.css'
 import { calender_header,calender_body} from '../../styles/calender.css'
 import Header from '../../components/header'
-import { thisMonth } from '../../components/this-month'
+
 
 const isServer = () => typeof window === 'undefined';
 
+function dmat(props: any) {
+
+    new Date()
+    return <div>{ props.time }</div>
+  }
 
 function Date() {
     const stg = localStorage.getItem('attendance')
@@ -43,7 +48,7 @@ export default function Calender() {
     <div className={styles.container}>
         <Header/>
           <h1>勤怠記録</h1>
-          <h2>{ thisMonth() }</h2>
+          <h2>10月</h2>
         <div className={ calender_header }>
             <div>日付</div>
             <div>開始</div>
