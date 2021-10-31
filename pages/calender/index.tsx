@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../../styles/Home.module.css'
-import { format,parseISO,parse } from 'date-fns'
+import { format,parseISO,parse, setDate } from 'date-fns'
 import {useState, useEffect} from 'react';
 import Link from 'next/link'
 import {marginTop} from '../../styles/margin.css'
@@ -37,13 +37,41 @@ function Date() {
     }
 }
 
+let date = 'aaaaaa'
+
+function selectedDate(e:any) {
+    if (process.browser) {
+        console.log(e.target.value)
+
+    }
+
+}
+
 export default function Calender() {
+
+
+    const [date, setDate] = useState('')
+
+
+    useEffect(() => {
+        if (process.browser) {
+            const monthControl = document.querySelector('input[type="month"]');
+            monthControl.addEventListener("input", selectedDate);
+            return () => monthControl.removeEventListener("input", selectedDate);
+        }
+
+      }, []);
 
   return (
     <div className={styles.container}>
         <Header/>
           <h1>勤怠記録</h1>
-          <h2>{ thisMonth() }</h2>
+          <h2>{thisMonth()}</h2>
+        <div>
+              <label>開始</label>
+              <input type="month" name="month"></input>
+              { date }
+        </div>
         <div className={ calender_header }>
             <div>日付</div>
             <div>開始</div>
